@@ -16,11 +16,24 @@ classifiers = [
     "Environment :: Console",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Topic :: Software Development :: Documentation",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/randhirk/AICodeGrapher"
+Repository = "https://github.com/randhirk/AICodeGrapher"
+Issues = "https://github.com/randhirk/AICodeGrapher/issues"
+Documentation = "https://github.com/randhirk/AICodeGrapher#readme"
+Changelog = "https://github.com/randhirk/AICodeGrapher/commits/main"
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0", "ruff>=0.4"]
@@ -32,7 +45,7 @@ codegraph = "codegrapher.cli:main"
 packages = ["src/codegrapher"]
 
 [tool.hatch.build.targets.sdist]
-include = ["src/codegrapher", "README.md", "LICENSE", "INTEGRATION.md"]
+include = ["src/codegrapher", "README.md", "LICENSE", "INTEGRATION.md", "CONTRIBUTING.md"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

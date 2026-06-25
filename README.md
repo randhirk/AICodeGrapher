@@ -1,6 +1,15 @@
-# CodeGrapher
+# AICodeGrapher
 
-**Compact code graphs for AI coding tools.** Scan any repository and produce a token-efficient map that Cursor, Claude Code, and Codex can use to navigate without reading every file.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Open Source](https://img.shields.io/badge/Open%20Source-Yes-blue.svg)](https://github.com/randhirk/AICodeGrapher)
+
+**Open source · MIT licensed · contributions welcome**
+
+Compact code graphs for AI coding tools. Scan any repository and produce a token-efficient map that Cursor, Claude Code, and Codex can use to navigate without reading every file.
+
+> **Repository:** [github.com/randhirk/AICodeGrapher](https://github.com/randhirk/AICodeGrapher)  
+> **Contributing:** see [CONTRIBUTING.md](CONTRIBUTING.md) · **Conduct:** [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 
 ## Why
 
@@ -170,11 +179,28 @@ codegraph -f codex && cat .codegraph/AGENTS.md.graph >> AGENTS.md
 ## Development
 
 ```bash
+git clone https://github.com/randhirk/AICodeGrapher.git
+cd AICodeGrapher
 pip install -e ".[dev]"
 pytest
 ruff check src tests
 ```
 
+## Contributing
+
+We welcome contributions from everyone! Whether you fix a parser bug, add language support, improve docs, or report issues — thank you.
+
+1. Read [CONTRIBUTING.md](CONTRIBUTING.md)
+2. Fork the repo and open a PR against `main`
+3. Follow the [Code of Conduct](CODE_OF_CONDUCT.md)
+
+**Good first contributions:**
+
+- Improve Kotlin / Swift / Java call-graph accuracy
+- Add examples under `examples/`
+- Fix false positives in call or doc extraction
+- Improve README and integration guides
+
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT — see [LICENSE](LICENSE). Free to use, modify, and distribute with attribution.

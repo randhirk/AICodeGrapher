@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Contributing guide
+    url: https://github.com/randhirk/AICodeGrapher/blob/main/CONTRIBUTING.md
+    about: How to fork, develop, and open a pull request
+  - name: Code of conduct
+    url: https://github.com/randhirk/AICodeGrapher/blob/main/CODE_OF_CONDUCT.md
+    about: Community standards for this project
