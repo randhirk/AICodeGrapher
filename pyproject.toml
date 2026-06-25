@@ -1,0 +1,43 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "codegrapher"
+version = "0.1.0"
+description = "Generate compact code graphs for AI coding tools — save tokens, keep context."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+authors = [{ name = "CodeGrapher Contributors" }]
+keywords = ["ai", "code-graph", "cursor", "claude", "codex", "llm", "context"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Documentation",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.4"]
+
+[project.scripts]
+codegraph = "codegrapher.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/codegrapher"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/codegrapher", "README.md", "LICENSE", "INTEGRATION.md"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
