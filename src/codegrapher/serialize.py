@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from codegrapher.models import CodeGraph, EdgeKind, NodeKind
+from codegrapher.models import CodeGraph, EdgeKind
 
 
 def to_json(graph: CodeGraph, *, indent: int | None = 2) -> str:

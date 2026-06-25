@@ -5,7 +5,6 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-from codegrapher.models import NodeKind
 from codegrapher.parsers.base import BaseParser, InheritanceSite, ParseResult
 from codegrapher.parsers.calls import extract_calls_line_based
 
