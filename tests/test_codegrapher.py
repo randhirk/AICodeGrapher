@@ -1,5 +1,7 @@
 """Tests for CodeGrapher."""
 
+import subprocess
+import sys
 from pathlib import Path
 
 from codegrapher.builder import build_graph, sym_id
@@ -183,3 +185,15 @@ def test_cli_main(tmp_path):
     from codegrapher.cli import main
     code = main([str(tmp_path), "--print", "compact", "-q"])
     assert code == 0
+
+
+def test_python_m_codegrapher(tmp_path):
+    sample = tmp_path / "app.py"
+    sample.write_text("def main():\n    pass\n")
+    result = subprocess.run(
+        [sys.executable, "-m", "codegrapher", str(tmp_path), "--print", "compact", "-q"],
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0
+    assert result.stdout.startswith("# CGF/")

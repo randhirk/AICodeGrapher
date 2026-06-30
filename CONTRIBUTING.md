@@ -15,7 +15,8 @@ Thank you for your interest in contributing! **AICodeGrapher** (package name: `c
 ```bash
 git clone https://github.com/randhirk/AICodeGrapher.git
 cd AICodeGrapher
-pip install -e ".[dev]"
+python3 -m pip install --upgrade pip
+python3 -m pip install -e ".[dev]"
 pytest
 ruff check src tests
 ```
@@ -24,6 +25,7 @@ Run the CLI on this repo to verify your changes:
 
 ```bash
 codegraph . --print compact
+# or: python3 -m codegrapher . --print compact
 ```
 
 ## Pull request process
