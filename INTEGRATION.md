@@ -2,6 +2,72 @@
 
 How to wire CodeGrapher into AI coding tools so agents navigate your repo with minimal tokens.
 
+## Prerequisites
+
+Install once (from the [AICodeGrapher repo](https://github.com/randhirk/AICodeGrapher)):
+
+```bash
+git clone https://github.com/randhirk/AICodeGrapher.git
+cd AICodeGrapher
+python3 -m pip install --upgrade pip
+python3 -m pip install -e .
+```
+
+Verify:
+
+```bash
+codegraph --version
+# or, if codegraph is not on PATH:
+python3 -m codegrapher --version
+```
+
+### `zsh: command not found` fixes
+
+**`pip` not found** — macOS often has no `pip` shim. Use:
+
+```bash
+python3 -m pip install -e .
+```
+
+**`codegraph` not found** — pip installed the script outside your PATH. Either:
+
+1. **Recommended:** use the module (no PATH change):
+
+   ```bash
+   python3 -m codegrapher -f cursor -o .codegraph
+   python3 -m codegrapher --print compact
+   ```
+
+2. **Permanent fix:** add Python’s user `bin` to zsh (adjust `3.9` to your version):
+
+   ```bash
+   echo 'export PATH="$HOME/Library/Python/3.9/bin:$PATH"' >> ~/.zshrc
+   source ~/.zshrc
+   ```
+
+   Linux:
+
+   ```bash
+   echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
+   source ~/.zshrc
+   ```
+
+3. **No install:** run from a clone:
+
+   ```bash
+   cd /path/to/AICodeGrapher
+   PYTHONPATH=src python3 -m codegrapher /path/to/your-app
+   ```
+
+**`editable mode currently requires a setuptools-based build`** — upgrade pip, then reinstall:
+
+```bash
+python3 -m pip install --upgrade pip
+python3 -m pip install -e .
+```
+
+---
+
 ## The idea
 
 1. Run `codegraph` on your repo (locally or in CI).
@@ -18,14 +84,20 @@ Cursor supports [project rules](https://docs.cursor.com/context/rules) in `.curs
 
 ### Setup
 
+From your **project root** (the repo you want Cursor to map):
+
 ```bash
-codegraph
-cp .codegraph/.cursor/rules/codegraph.mdc .cursor/rules/codegraph.mdc
+mkdir -p .cursor/rules
+codegraph -f cursor -o .codegraph
+cp .codegraph/.cursor/rules/codegraph.mdc .cursor/rules/
 ```
 
-Or generate only the Cursor rule:
+If `codegraph` is not on PATH, prefix with `python3 -m codegrapher` (same flags).
+
+Or write the rule directly into `.cursor/rules/` (no copy step):
 
 ```bash
+mkdir -p .cursor/rules
 codegraph -f cursor -o .
 ```
 
@@ -34,7 +106,8 @@ The rule has `alwaysApply: true` so every Agent chat gets the graph automaticall
 ### Refresh after big refactors
 
 ```bash
-codegraph -f cursor -o . && cp .codegraph/.cursor/rules/codegraph.mdc .cursor/rules/
+mkdir -p .cursor/rules
+codegraph -f cursor -o .codegraph && cp .codegraph/.cursor/rules/codegraph.mdc .cursor/rules/
 ```
 
 ### Manual paste
@@ -53,8 +126,11 @@ Claude Code reads `CLAUDE.md` at the project root for persistent context.
 
 ### Setup
 
+From your project root:
+
 ```bash
-codegraph -f claude
+codegraph -f claude -o .codegraph
+touch CLAUDE.md   # create if missing
 cat .codegraph/CLAUDE.md.graph >> CLAUDE.md
 ```
 
@@ -66,8 +142,11 @@ Agents that follow the AGENTS.md convention can use the same graph.
 
 ### Setup
 
+From your project root:
+
 ```bash
-codegraph -f codex
+codegraph -f codex -o .codegraph
+touch AGENTS.md   # create if missing
 cat .codegraph/AGENTS.md.graph >> AGENTS.md
 ```
 
